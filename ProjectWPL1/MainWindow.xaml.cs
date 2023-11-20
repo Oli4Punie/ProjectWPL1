@@ -24,5 +24,15 @@ namespace ProjectWPL1
         {
             InitializeComponent();
         }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

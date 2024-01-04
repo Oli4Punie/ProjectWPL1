@@ -5,16 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWPL1"
         mc:Ignorable="d"
-        Title="Schoravéclicker" Height="450" Width="800">
+        Title="CoockieClicker" Height="500" Width="800" Loaded="Window_Loaded">
     <Grid>
         <WrapPanel Width="800">
             <StackPanel Height="450" Width="266">
-                <WrapPanel>
-                    <Label Content="Gemiddelde aantal scoutscoins:"></Label>
-                    <TextBox x:Name="TxtGemiddelde" Width="80" IsEnabled="False"></TextBox>
-                </WrapPanel>
-                <TextBox x:Name="TxtSchoravé" IsEnabled="False"></TextBox>
-                <Image Source="schoravélogo.png" Width="200" MouseDown="Image_MouseDown" MouseUp="Image_MouseUp"/>
+                <Label x:Name="LblNaamMiner" Content="PXL-Coockieclicker" FontWeight="Bold" MouseDoubleClick="LblNaamMiner_MouseDoubleClick"></Label>
+                <Label x:Name="LblCookieCount" Width="250" Height="50" Content="0 Coockies" FontWeight="Bold" FontSize="20"></Label>
+                <Button x:Name="BtnCoockie" Click="BtnCoockie_Click">
+                    <Image Source="coockie.jpg"></Image>
+                </Button>
             </StackPanel>
             <StackPanel Height="450" Width="266">
                 <WrapPanel>
@@ -38,19 +37,26 @@
             </StackPanel>
             <StackPanel Height="450" Width="266">
                 <WrapPanel>
-                    <Button x:Name="BtnCursor" Content="Cursor" Width="266" Height="85"></Button>
+                    <Label Content="Store" Margin="105,0,0,0" FontSize="20"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnLeiding" Width="266" Content="Leiding" Height="85"></Button>
+                    <Label  x:Name="LblGemCoockies"></Label>
+                    <Label x:Name="LblTimer"></Label>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnKampvuur" Width="266" Content="Kampvuur" Height="85"></Button>
+                    <Button x:Name="BtnCursor" Content="Cursor" Width="266" Height="60" Click="BtnCursor_Click"></Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnMine" Width="266" Content="Mine" Height="85"></Button>
+                    <Button x:Name="BtnGrandma" Width="266" Content="Grandma" Height="60" Click="BtnGrandma_Click"></Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnFactory" Width="266" Content="Factory" Height="85"></Button>
+                    <Button x:Name="BtnFarm" Width="266" Content="Farm" Height="60" Click="BtnFarm_Click"></Button>
+                </WrapPanel>
+                <WrapPanel>
+                    <Button x:Name="BtnMine" Width="266" Content="Mine" Height="60" Click="BtnMine_Click"></Button>
+                </WrapPanel>
+                <WrapPanel>
+                    <Button x:Name="BtnFactory" Width="266" Content="Factory" Height="60" Click="BtnFactory_Click"></Button>
                 </WrapPanel>
             </StackPanel>
         </WrapPanel>

@@ -96,14 +96,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="coockie.jpg" />
+    <Resource Include="Images\coockie.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Cursor.jpg" />
-    <Resource Include="Factory.png" />
-    <Resource Include="Farm.jpg" />
-    <Resource Include="Grandma.png" />
-    <Resource Include="Mine.jpg" />
+    <Resource Include="Images\Cursor.jpg" />
+    <Resource Include="Images\Factory.png" />
+    <Resource Include="Images\Farm.jpg" />
+    <Resource Include="Images\Grandma.png" />
+    <Resource Include="Images\Mine.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bank.jpg" />
+    <Resource Include="Images\Temple.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

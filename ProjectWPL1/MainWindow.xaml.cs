@@ -33,7 +33,13 @@ namespace ProjectWPL1
         }
         int elapsedSeconds = 0;
         int cookies = 0;
+        bool isMouseDown = false;
         double multiplier = 1;
+        int AantalCursors = 0;
+        int AantalGrandma = 0;
+        int AantalFarm = 0;
+        int AantalMine = 0;
+        int AantalFactory = 0;
         private void timer_Tick(object sender, EventArgs e)
         {
             elapsedSeconds++;
@@ -42,6 +48,30 @@ namespace ProjectWPL1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void BtnCoockie_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void BtnCoockie_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void ImgCoockie_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                ImgCoockie.Width = 250;
+                ImgCoockie.Height = 250;
+            }
+            isMouseDown = false;
+        }
+        private void ImgCoockie_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ImgCoockie.Width = 180;
+            ImgCoockie.Height = 180;
+            isMouseDown = true;
         }
         private void BtnCoockie_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +87,8 @@ namespace ProjectWPL1
             if (cookies >= 15)
             {
                 cookies -= 15;
-                multiplier *= 0.1;
+                AantalCursors++;
+                UpdateCursorCount();
                 UpdateCookieCount();
             }
             else
@@ -65,17 +96,28 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!", "Waarschuwing");
             }
         }
+        private void UpdateCursorCount()
+        {
+            LblAantalGekochteUpgradesCursor.Content = $"Aantal cursors: {AantalCursors}";
+        }
+        
         private void BtnGrandma_Click(object sender, RoutedEventArgs e)
         {
             if (cookies >= 100)
             {
                 cookies -= 100;
+                AantalGrandma++;
+                UpdateGranmaCount();
                 UpdateCookieCount();
             }
             else
             {
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
+        }
+        private void UpdateGranmaCount()
+        {
+            LblAantalGekochteUpgradesGrandma.Content = $"Aantal granma's {AantalGrandma}";
         }
 
         private void BtnFarm_Click(object sender, RoutedEventArgs e)
@@ -83,6 +125,8 @@ namespace ProjectWPL1
             if (cookies >= 1100)
             {
                 cookies -= 1100;
+                AantalFarm++;
+                UpdateFarmCount();
                 UpdateCookieCount();
             }
             else
@@ -90,12 +134,17 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
-
+        private void UpdateFarmCount()
+        {
+            LblAantalGekochteUpgradesFarm.Content=$"Aantal Farm's {AantalFarm}";
+        }
         private void BtnMine_Click(object sender, RoutedEventArgs e)
         {
             if (cookies >= 12000)
             {
                 cookies -= 12000;
+                AantalMine++;
+                UpdateMineCount();
                 UpdateCookieCount();
             }
             else
@@ -103,18 +152,27 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
-
+        private void UpdateMineCount()
+        {
+            LblAantalGekochteUpgradesMine.Content=$"Aantal Mine's {AantalMine}";
+        }
         private void BtnFactory_Click(object sender, RoutedEventArgs e)
         {
             if (cookies >= 130000)
             {
                 cookies -= 130000;
+                AantalFactory++;
+                UpdateFactoryCount();
                 UpdateCookieCount();
             }
             else
             {
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
+        }
+        private void UpdateFactoryCount()
+        {
+            LblAantalGekochteUpgradesFactory.Content = $"Aantal factory's {AantalFactory}";
         }
         private void GemiddeldeCoockies()
         {

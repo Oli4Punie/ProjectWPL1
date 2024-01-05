@@ -11,28 +11,25 @@
             <StackPanel Height="450" Width="266">
                 <Label x:Name="LblNaamMiner" Content="PXL-Coockieclicker" FontWeight="Bold" MouseDoubleClick="LblNaamMiner_MouseDoubleClick"></Label>
                 <Label x:Name="LblCookieCount" Width="250" Height="50" Content="0 Coockies" FontWeight="Bold" FontSize="20"></Label>
-                <Button x:Name="BtnCoockie" Click="BtnCoockie_Click">
-                    <Image Source="coockie.jpg"></Image>
+                <Button x:Name="BtnCoockie" Click="BtnCoockie_Click" Background="White" MouseDown="BtnCoockie_MouseDown" MouseUp="BtnCoockie_MouseUp">
+                    <Image Source="coockie.jpg" x:Name="ImgCoockie" Width="250" Height="250"></Image>
                 </Button>
             </StackPanel>
             <StackPanel Height="450" Width="266">
                 <WrapPanel>
-                    
+                    <ListBox x:Name="LstCursor" Height="80"></ListBox>
                 </WrapPanel>
                 <WrapPanel>
-                    
+                    <ListBox x:Name="LstGrandma" Height="80"></ListBox>
                 </WrapPanel>
                 <WrapPanel>
-                    
+                    <ListBox x:Name="LstFarm" Height="80"></ListBox>
                 </WrapPanel>
                 <WrapPanel>
-                    
+                    <ListBox x:Name="LstMine" Height="80"></ListBox>
                 </WrapPanel>
                 <WrapPanel>
-                    
-                </WrapPanel>
-                <WrapPanel>
-                    
+                    <ListBox x:Name="LstFactory" Height="80"></ListBox>
                 </WrapPanel>
             </StackPanel>
             <StackPanel Height="450" Width="266">
@@ -40,23 +37,83 @@
                     <Label Content="Store" Margin="105,0,0,0" FontSize="20"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Label  x:Name="LblGemCoockies"></Label>
+                    <Label x:Name="LblGemCoockies"></Label>
                     <Label x:Name="LblTimer"></Label>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnCursor" Content="Cursor" Width="266" Height="60" Click="BtnCursor_Click"></Button>
+                    <Button x:Name="BtnCursor" Width="266" Height="60" Click="BtnCursor_Click">
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image Source="Cursor.jpg" Height="60"></Image>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblPrijsCursor"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblAantalGekochteUpgradesCursor"></Label>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnGrandma" Width="266" Content="Grandma" Height="60" Click="BtnGrandma_Click"></Button>
+                    <Button x:Name="BtnGrandma" Width="266" Height="60" Click="BtnGrandma_Click">
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image Source="Grandma.png" Height="60"></Image>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblPrijsGrandma"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblAantalGekochteUpgradesGrandma"></Label>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnFarm" Width="266" Content="Farm" Height="60" Click="BtnFarm_Click"></Button>
+                    <Button x:Name="BtnFarm" Width="266" Height="60" Click="BtnFarm_Click">
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image Source="Farm.jpg" Height="60"></Image>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblPrijsFarm"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblAantalGekochteUpgradesFarm"></Label>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnMine" Width="266" Content="Mine" Height="60" Click="BtnMine_Click"></Button>
+                    <Button x:Name="BtnMine" Width="266" Height="60" Click="BtnMine_Click">
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image Source="Mine.jpg" Height="60"></Image>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblPrijsMine"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblAantalGekochteUpgradesMine"></Label>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnFactory" Width="266" Content="Factory" Height="60" Click="BtnFactory_Click"></Button>
+                    <Button x:Name="BtnFactory" Width="266" Height="60" Click="BtnFactory_Click">
+                        <WrapPanel>
+                            <StackPanel>
+                                <Image Source="Factory.png" Height="60"></Image>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblPrijsFacctory"></Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="LblAantalGekochteUpgradesFactory"></Label>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
             </StackPanel>
         </WrapPanel>

@@ -33,9 +33,13 @@ namespace ProjectWPL1
             timer.Tick += timer_Tick; 
             timer.Start();
             DispatcherTimer passiefInkomen = new DispatcherTimer();
-            passiefInkomen.Interval = TimeSpan.FromMilliseconds(10);
+            passiefInkomen.Interval = TimeSpan.FromSeconds(1);
             passiefInkomen.Tick += passiefInkomen_Tick;
             passiefInkomen.Start();
+            DispatcherTimer goldenCookie = new DispatcherTimer();
+            goldenCookie.Interval = TimeSpan.FromMinutes(1);
+            goldenCookie.Tick += goldenCookie_Tick;
+            goldenCookie.Start();
         }
         int elapsedSeconds = 0;
         long cookies = 0;
@@ -54,6 +58,12 @@ namespace ProjectWPL1
         int AantalKeerGekochtBank = 0;
         int AantalKeerGekochtTemple = 0;
         int coockiesPerSeconde = 0;
+        Random random = new Random();
+        int bonusMultiplier = 1;
+        long bonusKosten = 100;
+        int basisInvestmentKosten = 1000;
+        long  huidigeCookies = 0;
+        List<string> quest = new List<string>();
         private void timer_Tick(object sender, EventArgs e)
         {
             elapsedSeconds++;
@@ -61,19 +71,19 @@ namespace ProjectWPL1
         }
         private void passiefInkomen_Tick(object sender, EventArgs e)
         {
-            double cursorPassiefInkomenPerInvestering = 0.001;
+            double cursorPassiefInkomenPerInvestering = 0.1;
             int totaalCursor = AantalCursors;
-            double grandmaPassiefInkomenPerInvestering = 0.01;
+            double grandmaPassiefInkomenPerInvestering = 1;
             int totaalGrandma = AantalGrandma;
-            double farmPassiefInkomenPerInvestring = 0.08;
+            double farmPassiefInkomenPerInvestring = 8;
             int totaalFarm = AantalFarm;
-            double minePassiefInkomenPerInvestering = 0.47;
+            double minePassiefInkomenPerInvestering = 47;
             int totaalMine = AantalMine;
-            double factoryPassiefInkomenPerInvestering = 2.60;
+            double factoryPassiefInkomenPerInvestering = 260;
             int totaalFactory = AantalFactory;
-            double bankPassiefInkomenPerInvestering = 14;
+            double bankPassiefInkomenPerInvestering = 1400;
             int totaalBank = AantalBank;
-            double templePassiefInkomenPerInvestering = 78;
+            double templePassiefInkomenPerInvestering = 7800;
             int totaalTemple = AantalTemple;
             double totaalPassiefInkomenCursor = cursorPassiefInkomenPerInvestering * totaalCursor;
             double totaalPassiefInkomenGrandma = grandmaPassiefInkomenPerInvestering * totaalGrandma;
@@ -87,9 +97,17 @@ namespace ProjectWPL1
             UpdateCookieCount();
             GemiddeldeCoockies(coockiesPerSeconde);
         }
+        private void goldenCookie_Tick(object sender, EventArgs e)
+        {
+            double randomValue = random.NextDouble();
+            if (randomValue < 0.3)
+            {
+                ShowGoldenCookie();
+            }
+        }
         private void BtnCoockie_Click(object sender, RoutedEventArgs e)
         {
-            cookies+= 100000;
+            cookies++;
             UpdateCookieCount();
         }
         private void UpdateCookieCount()
@@ -309,6 +327,7 @@ namespace ProjectWPL1
                 return $"{nummmer:N0}";
             }
         }
+       
         private void LblNaamMiner_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -322,6 +341,91 @@ namespace ProjectWPL1
             }
             LblNaamMiner.Content = minerNaam;
         }
+        private void ShowGoldenCookie()
+        {
+            double rondomValue = random.NextDouble();
+            ImgGoldenCookie.Source = new BitmapImage(new Uri("Images/GoldenCookie.png", UriKind.Relative));
+            BtnGoldenCookie.Click += BtnGoldenCookie_Click; 
+            if(rondomValue > 0.3) 
+            {
+                BtnGoldenCookie.Visibility = Visibility.Visible;
+                BtnGoldenCookie.Click += BtnGoldenCookie_Click;
+            }
+        }
 
+        private void BtnGoldenCookie_Click(object sender, RoutedEventArgs e)
+        {
+            int cookieProductiePerMinuut = 10;
+            int cookieBijvoegen = 15 * cookieProductiePerMinuut;
+            AddCoookiesAanSpeler(cookieBijvoegen);
+            BtnGoldenCookie.Visibility = Visibility.Hidden;
+            BtnGoldenCookie.Click -= BtnGoldenCookie_Click;
+        }
+        private void AddCoookiesAanSpeler(int cookieBijvoegen)
+        {
+            if(LblCookieCount !=null && LblCookieCount.Content is string content)
+            {
+                if(int.TryParse(content, out int huidigecookies))
+                {
+                    int nieuwecookies = huidigecookies + cookieBijvoegen;
+                    LblCookieCount.Content = nieuwecookies.ToString();
+                }
+            }
+        }
+        private void BtnBonusStore_Click(object sender, RoutedEventArgs e)
+        {
+            KrijgBonus();
+            UpdateBonusKnop(null);
+        }
+        private void UpdateBonusKnop(Button investeringsKnop)
+        {
+            BtnBonusStore.Visibility = CanAffordBonus() ? Visibility.Visible : Visibility.Hidden;
+            BtnBonusStore.IsEnabled = CanAffordBonus();
+            BtnBonusStore.Content = $"Verdubbel Inkomsten (Cost: {bonusKosten}, x{bonusMultiplier}";
+            if(investeringsKnop != null)
+            {
+                BtnBonusStore.Margin = investeringsKnop.Margin;
+            }
+        }
+        private bool CanAffordBonus()
+        {
+            long huidigeCookies = KrijgHuidigeCookies();
+            return huidigeCookies >= bonusKosten;
+        }
+        private long KrijgHuidigeCookies()
+        {
+            return huidigeCookies;
+        }
+        private void KrijgBonus()
+        {
+            long huidigeCookies = KrijgHuidigeCookies();
+            huidigeCookies = Math.Max(0, huidigeCookies-bonusKosten);
+            bonusMultiplier *= 2;
+            bonusKosten = BerekeningBonusKosten(bonusMultiplier, basisInvestmentKosten);
+        }
+        private long BerekeningBonusKosten(int NummerVanApps, long basisInvestmentKosten)
+        {
+            long multiplier = 0;
+            switch(NummerVanApps)
+            {
+                case 0:
+                    multiplier = 100;
+                    break;
+                case 1:
+                    multiplier = 500;
+                    break;
+                case 2:
+                    multiplier = 5000;
+                    break;
+                case 3:
+                    multiplier = 50000;
+                    break;
+                default:
+                    multiplier= (long)Math.Pow(10, NummerVanApps -3) * 500000;
+                    break;
+            }
+            long bonusKosten = basisInvestmentKosten * multiplier;
+            return bonusKosten;
+        }
     }
 }

@@ -14,29 +14,24 @@
                 <Button x:Name="BtnCoockie" Click="BtnCoockie_Click" Background="White">
                     <Image Source="Images/coockie.jpg" x:Name="ImgCoockie" Width="250" Height="250"></Image>
                 </Button>
+                <WrapPanel>
+                    <Button x:Name="BtnGoldenCookie" Width="80" Height="100" Background="White" Visibility="Hidden" Click="BtnGoldenCookie_Click">
+                        <Image Source="Images/GoldenCookie.png" Height="80" Width="80" x:Name="ImgGoldenCookie"></Image>
+                    </Button>
+                    <Button x:Name="BtnBonusStore" Width="80" Height="100" Content="Bonus Store" FontWeight="Bold"  Visibility="Hidden" Click="BtnBonusStore_Click"></Button>
+                    <Button x:Name="BtnQuests" Width="80" Height="100" Content="Quest" FontWeight="Bold"></Button>
+                </WrapPanel>
             </StackPanel>
             <StackPanel Height="450" Width="266">
-                <WrapPanel>
+                <Canvas x:Name="CnvGroot" Height="450">
                     <ListBox x:Name="LstCursor" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstGrandma" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstFarm" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstMine" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstFactory" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstBank" Height="60"></ListBox>
-                </WrapPanel>
-                <WrapPanel>
-                    <ListBox x:Name="LstTemple" Height="60"></ListBox>
-                </WrapPanel>
+                    <ListBox x:Name="LstGrandma" Height="60" Canvas.Top="60"></ListBox>
+                    <ListBox x:Name="LstFarm" Height="60" Canvas.Top="120"></ListBox>
+                    <ListBox x:Name="LstMine" Height="60" Canvas.Top="180"></ListBox>
+                    <ListBox x:Name="LstFactory" Height="60" Canvas.Top="240"></ListBox>
+                    <ListBox x:Name="LstBank" Height="60" Canvas.Top="300"></ListBox>
+                    <ListBox x:Name="LstTemple" Height="60" Canvas.Top="360"></ListBox>
+                </Canvas>
             </StackPanel>
             <StackPanel Height="450" Width="266">
                 <WrapPanel>

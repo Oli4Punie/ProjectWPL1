@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWPL1"
         mc:Ignorable="d"
-        Title="CoockieClicker" Height="500" Width="800" Loaded="Window_Loaded">
+        Title="CoockieClicker" Height="500" Width="800">
     <Grid>
         <WrapPanel Width="800">
             <StackPanel Height="450" Width="266">
                 <Label x:Name="LblNaamMiner" Content="PXL-Backery" FontWeight="Bold" MouseDoubleClick="LblNaamMiner_MouseDoubleClick"></Label>
                 <Label x:Name="LblCookieCount" Width="250" Height="50" Content="0 Coockies" FontWeight="Bold" FontSize="20"></Label>
-                <Button x:Name="BtnCoockie" Click="BtnCoockie_Click" Background="White" MouseDown="BtnCoockie_MouseDown" MouseUp="BtnCoockie_MouseUp">
+                <Button x:Name="BtnCoockie" Click="BtnCoockie_Click" Background="White">
                     <Image Source="Images/coockie.jpg" x:Name="ImgCoockie" Width="250" Height="250"></Image>
                 </Button>
             </StackPanel>

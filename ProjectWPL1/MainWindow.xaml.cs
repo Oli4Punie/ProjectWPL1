@@ -28,6 +28,7 @@ namespace ProjectWPL1
         public MainWindow()
         {
             InitializeComponent();
+            InitializeQuests();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick; 
@@ -63,7 +64,8 @@ namespace ProjectWPL1
         long bonusKosten = 100;
         int basisInvestmentKosten = 1000;
         long  huidigeCookies = 0;
-        List<string> quest = new List<string>();
+        List<string> quests;
+        List<string> completedquests;
         private void timer_Tick(object sender, EventArgs e)
         {
             elapsedSeconds++;
@@ -96,6 +98,7 @@ namespace ProjectWPL1
             coockiesPerSeconde = (int)(totaalPassiefInkomenCursor + totaalPassiefInkomenGrandma + totaalPassiefInkomenFarm + totaalPassiefInkomenMine + totaalPassiefInkomenFactory + totaalPassiefInkomenBank + totaalPassiefInkomenTemple);
             UpdateCookieCount();
             GemiddeldeCoockies(coockiesPerSeconde);
+            UpdateQuest();
         }
         private void goldenCookie_Tick(object sender, EventArgs e)
         {
@@ -128,7 +131,8 @@ namespace ProjectWPL1
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsCursor.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateCursorCount();
-                UpdateCookieCount(); 
+                UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -156,6 +160,7 @@ namespace ProjectWPL1
                 LblPrijsGrandma.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateGranmaCount();
                 UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -181,7 +186,9 @@ namespace ProjectWPL1
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsFarm.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateFarmCount();
-                UpdateCookieCount();
+                UpdateCookieCount(); 
+                UpdateQuest();
+
             }
             else
             {
@@ -207,6 +214,7 @@ namespace ProjectWPL1
                 LblPrijsMine.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateMineCount();
                 UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -232,6 +240,7 @@ namespace ProjectWPL1
                 LblPrijsFactory.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateFactoryCount();
                 UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -257,6 +266,7 @@ namespace ProjectWPL1
                 LblPrijsBank.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateBankCount();
                 UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -282,6 +292,7 @@ namespace ProjectWPL1
                 LblPrijsTemple.Content = $"Prijs: {nieuweKosten} cookies";
                 UpdateTempleCount();
                 UpdateCookieCount();
+                UpdateQuest();
             }
             else
             {
@@ -426,6 +437,155 @@ namespace ProjectWPL1
             }
             long bonusKosten = basisInvestmentKosten * multiplier;
             return bonusKosten;
+        }
+        private void CheckQuests()
+        {
+            foreach(string quest in quests)
+            {
+                if(!completedquests.Contains(quest) && HeeftSpelerQuestBehaald(quest))
+                {
+                    completedquests.Add(quest);
+                    MessageBox.Show($"Gefeliciteerd! Je hebt de quest behaald:\n{quest}", "Quest Behaald");
+                }
+            }
+        }
+        private bool HeeftSpelerQuestBehaald(string quest)
+        {
+
+            if(quest == "Behaal 1 cookie"&& cookies >=1)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 50 cookies" && cookies >= 50)
+            {
+                return true;
+            }
+            else if (quest== "Behaal 100 cookies" && cookies >= 100)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 1000 cookies" && cookies >= 1000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 5000 cookies" && cookies >= 5000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 10000 cookies" && cookies >= 10000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 50000 cookies" && cookies >= 50000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 100000 cookies" && cookies >= 100000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 500000 cookies" && cookies >= 500000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 1000000 cookies" && cookies >= 1000000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 5000000 cookies" && cookies >= 5000000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 1000000000 cookies" && cookies >= 1000000000)
+            {
+                return true;
+            }
+            else if (quest == "Behaal 5000000000 cookies" && cookies >= 5000000000)
+            {
+                return true;
+            }
+            else if(quest =="Koop 5 cursors"&& AantalCursors>=5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 grandma's" && AantalGrandma >= 5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 farm's" && AantalFarm >= 5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 Mine's" && AantalMine >= 5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 factory's" && AantalFactory >= 5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 bank's" && AantalBank >= 5)
+            {
+                return true;
+            }
+            else if (quest == "Koop 5 temple's" && AantalTemple >= 5)
+            {
+                return true;
+            }
+            return false;
+        }
+        private void UpdateQuest()
+        {
+            CheckQuests();
+        }
+
+        private void BtnQuests_Click(object sender, RoutedEventArgs e)
+        {
+            ToonVoltooideQuests();
+        }
+        private void ToonVoltooideQuests()
+        {
+            Window voltooideQuests = new Window()
+            {
+                Title = "Behaalde Quests",
+                Width = 500,
+                Height = 500,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            ListBox LstVoltooideQuests = new ListBox();
+            foreach(string quest in completedquests)
+            {
+                LstVoltooideQuests.Items.Add(quest);
+            }
+            voltooideQuests.Content = LstVoltooideQuests;
+            voltooideQuests.ShowDialog();
+        }
+        private void InitializeQuests()
+        {
+            quests = new List<string>
+            {
+                "Behaal 1 cookie",
+                "Koop 5 cursors",
+                "Koop 5 grandma's",
+                "Koop 5 farms",
+                "Koop 5 mine's",
+                "Koop 5 factory's",
+                "Koop 5 banks",
+                "Koop 5 temple's",
+                "behaal 50 cookies",
+                "behaal 100 cookies",
+                "behaal 1000 cookies",
+                "behaal 5000 cookies",
+                "behaal 10000 cookies",
+                "behaal 50000 cookies",
+                "behaal 100000 cookies",
+                "behaal 500000 cookies",
+                "behaal 1000000 cookies",
+                "behaal 5000000 cookies",
+                "behaal 1000000000 cookies",
+                "Behaal 5000000000 cookies"
+            };
+            completedquests = new List<string>();
         }
     }
 }

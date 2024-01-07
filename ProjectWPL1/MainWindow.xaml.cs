@@ -25,6 +25,14 @@ namespace ProjectWPL1
     /// </summary>
     public partial class MainWindow : Window
     {
+        ///--------------------------------
+        /// Description:
+        /// 1-PROa C# Project Coockie Clicker WPL1
+        ///--------------------------------
+
+        ///<summary>
+        ///Opstarten van de aplicatie: Timers aanmaken en laten starten.
+        ///</summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -42,35 +50,42 @@ namespace ProjectWPL1
             goldenCookie.Tick += goldenCookie_Tick;
             goldenCookie.Start();
         }
-        int elapsedSeconds = 0;
-        long cookies = 0;
-        int AantalCursors = 0;
-        int AantalGrandma = 0;
-        int AantalFarm = 0;
-        int AantalMine = 0;
-        int AantalFactory = 0;
-        int AantalBank = 0;
-        int AantalTemple = 0;
-        int AantalKeerGekochtCursor = 0;
-        int AantalKeerGekochtGrandma = 0;
-        int AantalKeerGekochtFarm = 0;
-        int AantalKeerGekochtMine = 0;
-        int AantalKeerGekochtFactory = 0;
-        int AantalKeerGekochtBank = 0;
-        int AantalKeerGekochtTemple = 0;
-        int coockiesPerSeconde = 0;
-        Random random = new Random();
-        int bonusMultiplier = 1;
-        long bonusKosten = 100;
-        int basisInvestmentKosten = 1000;
-        long  huidigeCookies = 0;
-        List<string> quests;
-        List<string> completedquests;
+
+        int elapsedSeconds = 0; //Aantal seconden
+        long cookies = 0; //Aantal cookies
+        int AantalCursors = 0;//Aantal cursors
+        int AantalGrandma = 0;//Aantal grandma
+        int AantalFarm = 0;//Aantal farm
+        int AantalMine = 0;//Aantal mine
+        int AantalFactory = 0;//Aantal factory
+        int AantalBank = 0;//Aantal bank
+        int AantalTemple = 0;//Aantal temple
+        int AantalKeerGekochtCursor = 0;//Aantal gekochte cursors
+        int AantalKeerGekochtGrandma = 0;//Aantal gekochte grandma's
+        int AantalKeerGekochtFarm = 0;//Aantal gekochte farm's
+        int AantalKeerGekochtMine = 0;//Aantal gekochte mine's
+        int AantalKeerGekochtFactory = 0;//Aantal gekochte factory's
+        int AantalKeerGekochtBank = 0;//Aantal gekochte banken
+        int AantalKeerGekochtTemple = 0;//Aantal gekochte temple's
+        int coockiesPerSeconde = 0;//Aantal cookies per seconden
+        Random random = new Random();//Random generator
+        int bonusMultiplier = 1;//Bonusmultiplier
+        long bonusKosten = 100;//Aantal bonus kosten
+        int basisInvestmentKosten = 1000;//Basis investerings kosten
+        long  huidigeCookies = 0;//huidige cookies
+        List<string> quests;//List met de quests in
+        List<string> completedquests;//List met de completed quests in
+        /// <summary>
+        /// Optellen van seconden in de timer en het laten weergeven in een label.
+        /// </summary>
         private void timer_Tick(object sender, EventArgs e)
         {
             elapsedSeconds++;
             LblTimer.Content = $"Verstreken tijd: {elapsedSeconds}";
         }
+        /// <summary>
+        /// Het bereken van het passief inkomen en de cookies per seconden.
+        /// </summary>
         private void passiefInkomen_Tick(object sender, EventArgs e)
         {
             double cursorPassiefInkomenPerInvestering = 0.1;
@@ -100,6 +115,9 @@ namespace ProjectWPL1
             GemiddeldeCoockies(coockiesPerSeconde);
             UpdateQuest();
         }
+        /// <summary>
+        /// De spawn kans van de golden cookie.
+        /// </summary>
         private void goldenCookie_Tick(object sender, EventArgs e)
         {
             double randomValue = random.NextDouble();
@@ -108,15 +126,32 @@ namespace ProjectWPL1
                 ShowGoldenCookie();
             }
         }
+        /// <summary>
+        /// Als er op de button gedrukt wordt komt er 1 koekje bij.
+        /// </summary>
         private void BtnCoockie_Click(object sender, RoutedEventArgs e)
         {
             cookies++;
             UpdateCookieCount();
         }
+        /// <summary>
+        /// Het weergeven van de cookiecounter in een label.
+        /// </summary>
         private void UpdateCookieCount()
         {
             LblCookieCount.Content = GrooteNummers(cookies) + "Coockies";
         }
+        /// <summary>
+        /// Een upgrade class om de image weer te geven in een listbox.
+        /// </summary>
+        private class Upgrade
+        {
+            public string Name { get; set; }
+            public string ImagePath { get; set; }
+        }
+        /// <summary>
+        /// Berekent de basis prijs van de cursor en berekent de nieuwe prijs eens er een cursor is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnCursor_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 15;
@@ -130,6 +165,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtCursor);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsCursor.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade  cursorUpgrade = new Upgrade
+                {
+                    Name="Cursor",
+                    ImagePath="Images/Cursor.jpg"
+                };
+                LstCursor.Items.Add(cursorUpgrade);
                 UpdateCursorCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -140,11 +181,16 @@ namespace ProjectWPL1
             }
             
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal cursors er al zijn gekocht.
+        /// </summary>
         private void UpdateCursorCount()
         {
             LblAantalGekochteUpgradesCursor.Content = $"Aantal cursors: {AantalCursors}";
         }
-        
+        /// <summary>
+        /// Berekent de basis prijs van de grandma en berekent de nieuwe prijs eens er een grandma is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnGrandma_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 100;
@@ -158,6 +204,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtGrandma);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsGrandma.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade grandmaUpgrade = new Upgrade
+                {
+                    Name = "Grandma",
+                    ImagePath = "Images/Grandma.png"
+                };
+                LstGrandma.Items.Add(grandmaUpgrade);
                 UpdateGranmaCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -167,11 +219,16 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal grandma's er al zijn gekocht.
+        /// </summary>
         private void UpdateGranmaCount()
         {
             LblAantalGekochteUpgradesGrandma.Content = $"Aantal granma's {AantalGrandma}";
         }
-
+        /// <summary>
+        /// Berekent de basis prijs van de farm en berekent de nieuwe prijs eens er een farm is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnFarm_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 1100;
@@ -185,6 +242,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtFarm);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsFarm.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade farmUpgrade = new Upgrade
+                {
+                    Name = "Farm",
+                    ImagePath = "Images/Farm.jpg"
+                };
+                LstFarm.Items.Add(farmUpgrade);
                 UpdateFarmCount();
                 UpdateCookieCount(); 
                 UpdateQuest();
@@ -195,10 +258,16 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal farm's er al zijn gekocht.
+        /// </summary>
         private void UpdateFarmCount()
         {
             LblAantalGekochteUpgradesFarm.Content=$"Aantal Farm's {AantalFarm}";
         }
+        /// <summary>
+        /// Berekent de basis prijs van de mine en berekent de nieuwe prijs eens er een mine is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnMine_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 12000;
@@ -212,6 +281,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtMine);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsMine.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade mineUpgrade = new Upgrade
+                {
+                    Name = "Mine",
+                    ImagePath = "Images/Mine.jpg"
+                };
+                LstMine.Items.Add(mineUpgrade);
                 UpdateMineCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -221,10 +296,16 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal mine's er al zijn gekocht.
+        /// </summary>
         private void UpdateMineCount()
         {
             LblAantalGekochteUpgradesMine.Content=$"Aantal Mine's {AantalMine}";
         }
+        /// <summary>
+        /// Berekent de basis prijs van de factory en berekent de nieuwe prijs eens er een factory is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnFactory_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 130000;
@@ -238,6 +319,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtFactory);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsFactory.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade factoryUpgrade = new Upgrade
+                {
+                    Name = "Factory",
+                    ImagePath = "Images/Factory.png"
+                };
+                LstFactory.Items.Add(factoryUpgrade);
                 UpdateFactoryCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -247,10 +334,16 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal factory's er al zijn gekocht.
+        /// </summary>
         private void UpdateFactoryCount()
         {
             LblAantalGekochteUpgradesFactory.Content = $"Aantal factory's {AantalFactory}";
         }
+        /// <summary>
+        /// Berekent de basis prijs van de bank en berekent de nieuwe prijs eens er een bank is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnBank_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 1400000;
@@ -264,6 +357,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtBank);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsBank.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade bankUpgrade = new Upgrade
+                {
+                    Name = "Bank",
+                    ImagePath = "Images/Bank.jpg"
+                };
+                LstBank.Items.Add(bankUpgrade);
                 UpdateBankCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -273,10 +372,16 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal banken er al zijn gekocht.
+        /// </summary>
         private void UpdateBankCount()
         {
             LblAantalGekochteUpgradesBank.Content = $"Aantal banken: {AantalBank}";
         }
+        /// <summary>
+        /// Berekent de basis prijs van de temple en berekent de nieuwe prijs eens er een temple is gekocht en geeft een image in de listbox.
+        /// </summary>
         private void BtnTemple_Click(object sender, RoutedEventArgs e)
         {
             double basisPrijs = 20000000;
@@ -290,6 +395,12 @@ namespace ProjectWPL1
                 double nieuweKosten = basisPrijs * Math.Pow(1.15, AantalKeerGekochtTemple);
                 nieuweKosten = Math.Ceiling(nieuweKosten);
                 LblPrijsTemple.Content = $"Prijs: {nieuweKosten} cookies";
+                Upgrade templeUpgrade = new Upgrade
+                {
+                    Name = "Temple",
+                    ImagePath = "Images/Temple.jpg"
+                };
+                LstTemple.Items.Add(templeUpgrade);
                 UpdateTempleCount();
                 UpdateCookieCount();
                 UpdateQuest();
@@ -299,14 +410,26 @@ namespace ProjectWPL1
                 MessageBox.Show("Je hebt niet genoeg cookies om dit te kopen!");
             }
         }
+        /// <summary>
+        /// Deze functie laat in een label zien hoeveel aantal temple's er al zijn gekocht.
+        /// </summary>
         private void UpdateTempleCount()
         {
             LblAantalGekochteUpgradesTemple.Content = $"Aantal temple's {AantalTemple}";
         }
+        /// <summary>
+        /// Deze functie laat in een label zien het gemiddelde aantal coockies per seconden.
+        /// </summary>
+        /// <param name="cps">Dit staat voor de index cookies per seconden.</param>
         private void GemiddeldeCoockies(double cps)
         {
             LblGemCoockies.Content = $"{cps:F1} Coockies per seconde";
         }
+        /// <summary>
+        /// Deze functie kijkt hoeveel cookies ik heb en of het verkleint kan worden met een woord.
+        /// </summary>
+        /// <param name="nummmer">staat voor het nummer van aantal cookies.</param>
+        /// <returns>Het nummer met de juisste achtervoeging als het een groot getal is.</returns>
         private string GrooteNummers(long nummmer)
         { 
             const double Miljard = 1_000_000_000;
@@ -338,7 +461,9 @@ namespace ProjectWPL1
                 return $"{nummmer:N0}";
             }
         }
-       
+       /// <summary>
+       /// Deze functie laat je van naam veranden in een popup scherm.
+       /// </summary>
         private void LblNaamMiner_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -352,6 +477,9 @@ namespace ProjectWPL1
             }
             LblNaamMiner.Content = minerNaam;
         }
+        /// <summary>
+        /// Deze functie laat de image van de golden cookie zien in een vakje.
+        /// </summary>
         private void ShowGoldenCookie()
         {
             double rondomValue = random.NextDouble();
@@ -363,7 +491,9 @@ namespace ProjectWPL1
                 BtnGoldenCookie.Click += BtnGoldenCookie_Click;
             }
         }
-
+        /// <summary>
+        /// Deze functie is voor als het gouden koekje verschijnt en er op geklikt wordt dat er dan bonussen gegeven worden aan de speler.
+        /// </summary>
         private void BtnGoldenCookie_Click(object sender, RoutedEventArgs e)
         {
             int cookieProductiePerMinuut = 10;
@@ -372,6 +502,10 @@ namespace ProjectWPL1
             BtnGoldenCookie.Visibility = Visibility.Hidden;
             BtnGoldenCookie.Click -= BtnGoldenCookie_Click;
         }
+       /// <summary>
+       /// Deze functie laat de bonus van de golden koekje zien in de label waar je koekjes in komen.
+       /// </summary>
+       /// <param name="cookieBijvoegen">Zijn de koekjes die worden bijgevoegd.</param>
         private void AddCoookiesAanSpeler(int cookieBijvoegen)
         {
             if(LblCookieCount !=null && LblCookieCount.Content is string content)
@@ -383,11 +517,18 @@ namespace ProjectWPL1
                 }
             }
         }
+        /// <summary>
+        /// Deze functie geeft de  store als er op de button wordt geklikt.
+        /// </summary>
         private void BtnBonusStore_Click(object sender, RoutedEventArgs e)
         {
             KrijgBonus();
             UpdateBonusKnop(null);
         }
+        /// <summary>
+        /// Deze functie geeft De knop om de bonus store te openen zichtbaar en geeft de bonussen weer.
+        /// </summary>
+        /// <param name="investeringsKnop">Is de index voor de investeringen.</param>
         private void UpdateBonusKnop(Button investeringsKnop)
         {
             BtnBonusStore.Visibility = CanAffordBonus() ? Visibility.Visible : Visibility.Hidden;
@@ -398,15 +539,26 @@ namespace ProjectWPL1
                 BtnBonusStore.Margin = investeringsKnop.Margin;
             }
         }
+        /// <summary>
+        /// Deze functie geeft de huidige koekjes weer en roept de variable krijghuidigecookies.
+        /// </summary>
+        /// <returns>De huidige koekjes als ze meer of gelijk aan de bonuskosten zijn.</returns>
         private bool CanAffordBonus()
         {
             long huidigeCookies = KrijgHuidigeCookies();
             return huidigeCookies >= bonusKosten;
         }
+        /// <summary>
+        /// Is een return functie voor de huidige koekjes.
+        /// </summary>
+        /// <returns>De huidige koekjes.</returns>
         private long KrijgHuidigeCookies()
         {
             return huidigeCookies;
         }
+        /// <summary>
+        /// Deze functie geeft weer de bonus die je krijgt na het kopen van een bonus.
+        /// </summary>
         private void KrijgBonus()
         {
             long huidigeCookies = KrijgHuidigeCookies();
@@ -414,6 +566,12 @@ namespace ProjectWPL1
             bonusMultiplier *= 2;
             bonusKosten = BerekeningBonusKosten(bonusMultiplier, basisInvestmentKosten);
         }
+        /// <summary>
+        /// Deze functie is de berekening van de Bonuskosten als ze meer dan 1 keer worden gekocht.
+        /// </summary>
+        /// <param name="NummerVanApps"> Is de index voor het aantal upgrades</param>
+        /// <param name="basisInvestmentKosten">Is de index van de basis investering kosten.</param>
+        /// <returns></returns>
         private long BerekeningBonusKosten(int NummerVanApps, long basisInvestmentKosten)
         {
             long multiplier = 0;
@@ -438,6 +596,9 @@ namespace ProjectWPL1
             long bonusKosten = basisInvestmentKosten * multiplier;
             return bonusKosten;
         }
+        /// <summary>
+        /// Deze functie kijkt naar de quest en als je een compleet hebt laat die een messagebox zien.
+        /// </summary>
         private void CheckQuests()
         {
             foreach(string quest in quests)
@@ -449,6 +610,11 @@ namespace ProjectWPL1
                 }
             }
         }
+        /// <summary>
+        /// Deze functie Kijkt of een speler de quest heeft gehaald of niet.
+        /// </summary>
+        /// <param name="quest">Deze index kijkt naar quest die er zijn.</param>
+        /// <returns></returns>
         private bool HeeftSpelerQuestBehaald(string quest)
         {
 
@@ -534,15 +700,23 @@ namespace ProjectWPL1
             }
             return false;
         }
+        /// <summary>
+        /// Deze functie checht de update de quest list als er een is voltooid.
+        /// </summary>
         private void UpdateQuest()
         {
             CheckQuests();
         }
-
+        /// <summary>
+        /// Bij deze functie als ze op de button duwen dan kunnen ze de behaalde quest zien.
+        /// </summary>
         private void BtnQuests_Click(object sender, RoutedEventArgs e)
         {
             ToonVoltooideQuests();
         }
+        /// <summary>
+        /// Deze functie laat de voltooide quests zien in een listbox in een popupwindow
+        /// </summary>
         private void ToonVoltooideQuests()
         {
             Window voltooideQuests = new Window()
@@ -560,6 +734,9 @@ namespace ProjectWPL1
             voltooideQuests.Content = LstVoltooideQuests;
             voltooideQuests.ShowDialog();
         }
+        /// <summary>
+        /// Deze functie laat alle quests zien.
+        /// </summary>
         private void InitializeQuests()
         {
             quests = new List<string>
@@ -567,22 +744,22 @@ namespace ProjectWPL1
                 "Behaal 1 cookie",
                 "Koop 5 cursors",
                 "Koop 5 grandma's",
-                "Koop 5 farms",
-                "Koop 5 mine's",
+                "Koop 5 farm's",
+                "Koop 5 Mine's",
                 "Koop 5 factory's",
-                "Koop 5 banks",
+                "Koop 5 bank's",
                 "Koop 5 temple's",
-                "behaal 50 cookies",
-                "behaal 100 cookies",
-                "behaal 1000 cookies",
-                "behaal 5000 cookies",
-                "behaal 10000 cookies",
-                "behaal 50000 cookies",
-                "behaal 100000 cookies",
-                "behaal 500000 cookies",
-                "behaal 1000000 cookies",
-                "behaal 5000000 cookies",
-                "behaal 1000000000 cookies",
+                "Behaal 50 cookies",
+                "Behaal 100 cookies",
+                "Behaal 1000 cookies",
+                "Behaal 5000 cookies",
+                "Behaal 10000 cookies",
+                "Behaal 50000 cookies",
+                "Behaal 100000 cookies",
+                "Behaal 500000 cookies",
+                "Behaal 1000000 cookies",
+                "Behaal 5000000 cookies",
+                "Behaal 1000000000 cookies",
                 "Behaal 5000000000 cookies"
             };
             completedquests = new List<string>();

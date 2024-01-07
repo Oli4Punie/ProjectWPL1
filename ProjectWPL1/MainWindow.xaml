@@ -27,13 +27,169 @@
             </StackPanel>
             <StackPanel Height="450" Width="266">
                 <Canvas x:Name="CnvGroot" Height="450">
-                    <ListBox x:Name="LstCursor" Height="60"></ListBox>
-                    <ListBox x:Name="LstGrandma" Height="60" Canvas.Top="60"></ListBox>
-                    <ListBox x:Name="LstFarm" Height="60" Canvas.Top="120"></ListBox>
-                    <ListBox x:Name="LstMine" Height="60" Canvas.Top="180"></ListBox>
-                    <ListBox x:Name="LstFactory" Height="60" Canvas.Top="240"></ListBox>
-                    <ListBox x:Name="LstBank" Height="60" Canvas.Top="300"></ListBox>
-                    <ListBox x:Name="LstTemple" Height="60" Canvas.Top="360"></ListBox>
+                    <StackPanel>
+                        <ListBox x:Name="LstCursor" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstGrandma" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstFarm" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstMine" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstFactory" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstBank" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox x:Name="LstTemple" Height="60" Width="266">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Image Source="{Binding ImagePath}" Height="50" Width="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
                 </Canvas>
             </StackPanel>
             <StackPanel Height="450" Width="266">

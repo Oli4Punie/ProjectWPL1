@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWPL1"
         mc:Ignorable="d"
-        Title="CoockieClicker" Height="500" Width="800">
+        Title="CoockieClicker" Height="550" Width="800">
     <Window.Background>
         <ImageBrush ImageSource="Images/Achtergrond.jpg"></ImageBrush>
     </Window.Background>
@@ -14,6 +14,7 @@
             <StackPanel Height="450" Width="266">
                 <Label x:Name="LblNaamMiner" Content="PXL-Backery" FontWeight="Bold" MouseDoubleClick="LblNaamMiner_MouseDoubleClick" Foreground="red"></Label>
                 <Label x:Name="LblCookieCount" Width="250" Height="50" Content="0 Coockies" FontWeight="Bold" FontSize="20"></Label>
+                <Label x:Name="LblGemCoockies" FontWeight="Bold"></Label>
                 <Button x:Name="BtnCoockie" Click="BtnCoockie_Click" Background="White">
                     <Image Source="Images/coockie.jpg" x:Name="ImgCoockie" Width="250" Height="250"></Image>
                 </Button>
@@ -193,15 +194,14 @@
                 </Canvas>
             </StackPanel>
             <StackPanel Height="450" Width="266">
-                <WrapPanel>
-                    <Label Content="Store" Margin="105,0,0,0" FontSize="20"/>
+                <WrapPanel Height="25">
+                    <Label Content="Store" Margin="105,0,0,0" Foreground="Red"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Label x:Name="LblGemCoockies"></Label>
-                    <Label x:Name="LblTimer"></Label>
+                    <Label x:Name="LblTimer" FontWeight="Bold"></Label>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button x:Name="BtnCursor" Width="266" Height="50" Click="BtnCursor_Click">
+                    <Button x:Name="BtnCursor" Width="266" Height="50" Click="BtnCursor_Click" MouseEnter="BtnCursor_MouseEnter">
                         <WrapPanel>
                             <StackPanel>
                                 <Image Source="Images/Cursor.jpg" Height="50"></Image>
@@ -311,6 +311,9 @@
                             </StackPanel>
                         </WrapPanel>
                     </Button>
+                </WrapPanel>
+                <WrapPanel>
+                    <Button x:Name="BtnStatistieken" Content="Statistieken" Width="266" Height="55" Click="BtnStatistieken_Click"></Button>
                 </WrapPanel>
             </StackPanel>
         </WrapPanel>

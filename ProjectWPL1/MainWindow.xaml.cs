@@ -37,6 +37,7 @@ namespace ProjectWPL1
         {
             InitializeComponent();
             InitializeQuests();
+            InitializeStatistieken();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick; 
@@ -75,13 +76,18 @@ namespace ProjectWPL1
         long  huidigeCookies = 0;//huidige cookies
         List<string> quests;//List met de quests in
         List<string> completedquests;//List met de completed quests in
+        List<string> statistiek;//List met statistieken van de game
+        int totaalAantalCookies = 0;//totaal aantal koekjes van heel het spel
+        int clicksManueel =0;//aantal keer dat er manueel is geklikt
+        int clicksGoudenCookies = 0;//Aantal keer dat er op het gouden koekje is geklikt
+        int aantalQuestsGehaald = 0;//Aantal quests dat er gehaald zijn
         /// <summary>
         /// Optellen van seconden in de timer en het laten weergeven in een label.
         /// </summary>
         private void timer_Tick(object sender, EventArgs e)
         {
             elapsedSeconds++;
-            LblTimer.Content = $"Verstreken tijd: {elapsedSeconds}";
+            LblTimer.Content = $"Aantal seconden in game: {elapsedSeconds}";
         }
         /// <summary>
         /// Het bereken van het passief inkomen en de cookies per seconden.
@@ -132,6 +138,8 @@ namespace ProjectWPL1
         private void BtnCoockie_Click(object sender, RoutedEventArgs e)
         {
             cookies++;
+            totaalAantalCookies++;
+            clicksManueel++;
             UpdateCookieCount();
         }
         /// <summary>
@@ -496,6 +504,7 @@ namespace ProjectWPL1
         /// </summary>
         private void BtnGoldenCookie_Click(object sender, RoutedEventArgs e)
         {
+            clicksGoudenCookies++;
             int cookieProductiePerMinuut = 10;
             int cookieBijvoegen = 15 * cookieProductiePerMinuut;
             AddCoookiesAanSpeler(cookieBijvoegen);
@@ -606,6 +615,7 @@ namespace ProjectWPL1
                 if(!completedquests.Contains(quest) && HeeftSpelerQuestBehaald(quest))
                 {
                     completedquests.Add(quest);
+                    aantalQuestsGehaald++;
                     MessageBox.Show($"Gefeliciteerd! Je hebt de quest behaald:\n{quest}", "Quest Behaald");
                 }
             }
@@ -763,6 +773,56 @@ namespace ProjectWPL1
                 "Behaal 5000000000 cookies"
             };
             completedquests = new List<string>();
+        }
+        /// <summary>
+        /// In deze functie wordt er als er op de button gedrukt wordt een update van de statistieken en een popupvenster getoont van de statistieken.
+        /// </summary>
+        private void BtnStatistieken_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateStatiestieken();
+            ToonStatistieken();
+        }
+        /// <summary>
+        /// In deze functie wordt de popupvenster gemaakt waar de statistieken in komen.
+        /// </summary>
+        private void ToonStatistieken()
+        {
+            Window statistieken = new Window()
+            {
+                Title = "Statistieken cookie clicker",
+                Width=500, 
+                Height=500,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+            ListBox LstStatistiek = new ListBox();
+            foreach(string statistiek in statistiek)
+            {
+                LstStatistiek.Items.Add(statistiek);
+            }
+            statistieken.Content = LstStatistiek;
+            statistieken.ShowDialog();
+        }
+        /// <summary>
+        /// In de deze functie staat een list met alle statistieken die in een popupvenster komt.
+        /// </summary>
+        private void InitializeStatistieken()
+        {
+            statistiek = new List<string>
+            {
+                $"Je hebt op dit moment {cookies} cookies",
+                $"Je hebt tijdens dit spel al {totaalAantalCookies + coockiesPerSeconde} cookies geproduceerd",
+                $"Je hebt al {LblTimer.Content}",
+                $"Je hebt al {clicksManueel} keer manueel geklikt",
+                $"Je hebt al {clicksGoudenCookies} keer op het gouden cookie geklikt",
+                $"Je hebt al {aantalQuestsGehaald} quests behaald"
+            };
+        }
+        /// <summary>
+        /// In deze functie worden alle statistieken geupdate.
+        /// </summary>
+        private void UpdateStatiestieken()
+        {
+            InitializeStatistieken();
         }
     }
 }
